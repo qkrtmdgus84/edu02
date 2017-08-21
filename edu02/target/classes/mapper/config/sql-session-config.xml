@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties resource="/config/globals/globals.properties" />
+
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="UserDTO" type="edu.seedit.common.dto.UserDTO"/>
+
+		<typeAlias alias="SampleVO" type="edu.seedit.sample.vo.SampleVO"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="/mapper/${Globals.DbType}/sample/sample.xml"/>
+		<mapper resource="/mapper/${Globals.DbType}/user.xml"/>
+	</mappers>
+</configuration>

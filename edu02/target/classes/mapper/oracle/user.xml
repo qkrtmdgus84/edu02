@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+	<!-- SELECT SEED_PEOPLE_HDR -->
+	<select id="selectUser" parameterType="UserDTO">
+		SELECT USER_ID
+			, CORP_CODE
+			, USER_PW
+			, USER_NAME
+			, USER_PHONE
+			, USER_EMAIL
+			, USER_LEVEL
+			, TOKEN
+			, USER_DEPARTMENT
+			, USER_PUSHID
+			, USER_RANKCODE
+			, USER_ROLE
+			, USER_VALUE
+			, USER_STATUS
+			, SESSION_ID
+			, PROFILE_NAME
+		FROM SEED_PEOPLE_HDR
+		WHERE 1=1
+		<if test="userId         !=null and userId         !=''"> AND USER_ID         = #{userId}        </if>
+		<if test="corpCode       !=null and corpCode       !=''"> AND CORP_CODE       = #{corpCode}      </if>
+		<if test="userPw         !=null and userPw         !=''"> AND USER_PW         = #{userPw}        </if>
+		<if test="userName       !=null and userName       !=''"> AND USER_NAME       = #{userName}      </if>
+		<if test="userPhone      !=null and userPhone      !=''"> AND USER_PHONE      = #{userPhone}     </if>
+		<if test="userEmail      !=null and userEmail      !=''"> AND USER_EMAIL      = #{userEmail}     </if>
+		<if test="userLevel      !=null and userLevel      !=''"> AND USER_LEVEL      = #{userLevel}     </if>
+		<if test="token          !=null and token          !=''"> AND TOKEN           = #{token}         </if>
+		<if test="userDepartment !=null and userDepartment !=''"> AND USER_DEPARTMENT = #{userDepartment}</if>
+		<if test="userPushid     !=null and userPushid     !=''"> AND USER_PUSHID     = #{userPushid}    </if>
+		<if test="userRankcode   !=null and userRankcode   !=''"> AND USER_RANKCODE   = #{userRankcode}  </if>
+		<if test="userRole       !=null and userRole       !=''"> AND USER_ROLE       = #{userRole}      </if>
+		<if test="userValue      !=null and userValue      !=''"> AND USER_VALUE      = #{userValue}     </if>
+		<if test="userStatus     !=null and userStatus     !=''"> AND USER_STATUS     = #{userStatus}    </if>
+		<if test="sessionId      !=null and sessionId      !=''"> AND SESSION_ID      = #{sessionId}     </if>
+		<if test="profileName    !=null and profileName    !=''"> AND PROFILE_NAME    = #{profileName}   </if>
+		<!--
+		<if test="status"       !=null and "status"       !=''"> AND STATUS         like '%${searchDateFrom}%' </if>
+		<if test="createUserId" !=null and "createUserId" !=''"> AND (CREATE_USER_ID >= #{searchDateFrom} OR CREATE_USER_ID <= #{searchDateTo}) </if>
+		<if test="createDate"   !=null and "createDate"   !=''"> AND (CREATE_DATE    >= #{searchDateFrom} OR CREATE_DATE    <= #{searchDateTo}) </if>
+		<if test="updateUserId" !=null and "updateUserId" !=''"> AND (UPDATE_USER_ID >= #{searchDateFrom} OR UPDATE_USER_ID <= #{searchDateTo}) </if>
+		<if test="updateDate"   !=null and "updateDate"   !=''"> AND (UPDATE_DATE    >= #{searchDateFrom} OR UPDATE_DATE    <= #{searchDateTo}) </if>
+		<if test="expireDate"   !=null and "expireDate"   !=''"> AND EXPIRE_DATE    = #{searchDateFrom} </if>
+		<if test="remarks"      !=null and "remarks"      !=''"> AND REMARKS        = #{searchDateFrom} </if>
+		 -->
+	</select>
+
+	<!-- INSERT SEED_PEOPLE_HDR -->
+	<insert id="insertUser" parameterType="UserDTO">
+		INSERT INTO SEED_PEOPLE_HDR (
+			USER_ID, CORP_CODE
+			<if test="userPw         !=null and userPw         !=''"> , USER_PW         </if>
+			<if test="userName       !=null and userName       !=''"> , USER_NAME       </if>
+			<if test="userPhone      !=null and userPhone      !=''"> , USER_PHONE      </if>
+			<if test="userEmail      !=null and userEmail      !=''"> , USER_EMAIL      </if>
+			<if test="userLevel      !=null and userLevel      !=''"> , USER_LEVEL      </if>
+			<if test="token          !=null and token          !=''"> , TOKEN           </if>
+			<if test="userDepartment !=null and userDepartment !=''"> , USER_DEPARTMENT </if>
+			<if test="userPushid     !=null and userPushid     !=''"> , USER_PUSHID     </if>
+			<if test="userRankcode   !=null and userRankcode   !=''"> , USER_RANKCODE   </if>
+			<if test="userRole       !=null and userRole       !=''"> , USER_ROLE       </if>
+			<if test="userValue      !=null and userValue      !=''"> , USER_VALUE      </if>
+			<if test="userStatus     !=null and userStatus     !=''"> , USER_STATUS     </if>
+			<if test="sessionId      !=null and sessionId      !=''"> , SESSION_ID      </if>
+			<if test="profileName    !=null and profileName    !=''"> , PROFILE_NAME    </if>
+		) VALUES(
+			#{userId}, #{corpCode}
+			<if test="userPw         !=null and userPw         !=''"> , #{userPw}         </if>
+			<if test="userName       !=null and userName       !=''"> , #{userName}       </if>
+			<if test="userPhone      !=null and userPhone      !=''"> , #{userPhone}      </if>
+			<if test="userEmail      !=null and userEmail      !=''"> , #{userEmail}      </if>
+			<if test="userLevel      !=null and userLevel      !=''"> , #{userLevel}      </if>
+			<if test="token          !=null and token          !=''"> , #{token}          </if>
+			<if test="userDepartment !=null and userDepartment !=''"> , #{userDepartment} </if>
+			<if test="userPushid     !=null and userPushid     !=''"> , #{userPushid}     </if>
+			<if test="userRankcode   !=null and userRankcode   !=''"> , #{userRankcode}   </if>
+			<if test="userRole       !=null and userRole       !=''"> , #{userRole}       </if>
+			<if test="userValue      !=null and userValue      !=''"> , #{userValue}      </if>
+			<if test="userStatus     !=null and userStatus     !=''"> , #{userStatus}     </if>
+			<if test="sessionId      !=null and sessionId      !=''"> , #{sessionId}      </if>
+			<if test="profileName    !=null and profileName    !=''"> , #{profileName}    </if>
+		)
+	</insert>
+
+	<!-- UPDATE SEED_PEOPLE_HDR -->
+	<update id="updateUser" parameterType="UserDTO">
+		UPDATE SEED_PEOPLE_HDR SET UPDATE_DATE = NOW()
+			<if test="corpCode       !=null and corpCode       !=''"> , CORP_CODE       = #{corpCode}       </if>
+			<if test="userPw         !=null and userPw         !=''"> , USER_PW         = #{userPw}         </if>
+			<if test="userName       !=null and userName       !=''"> , USER_NAME       = #{userName}       </if>
+			<if test="userPhone      !=null and userPhone      !=''"> , USER_PHONE      = #{userPhone}      </if>
+			<if test="userEmail      !=null and userEmail      !=''"> , USER_EMAIL      = #{userEmail}      </if>
+			<if test="userLevel      !=null and userLevel      !=''"> , USER_LEVEL      = #{userLevel}      </if>
+			<if test="token          !=null and token          !=''"> , TOKEN           = #{token}          </if>
+			<if test="userDepartment !=null and userDepartment !=''"> , USER_DEPARTMENT = #{userDepartment} </if>
+			<if test="userPushid     !=null and userPushid     !=''"> , USER_PUSHID     = #{userPushid}     </if>
+			<if test="userRankcode   !=null and userRankcode   !=''"> , USER_RANKCODE   = #{userRankcode}   </if>
+			<if test="userRole       !=null and userRole       !=''"> , USER_ROLE       = #{userRole}       </if>
+			<if test="userValue      !=null and userValue      !=''"> , USER_VALUE      = #{userValue}      </if>
+			<if test="userStatus     !=null and userStatus     !=''"> , USER_STATUS     = #{userStatus}     </if>
+			<if test="sessionId      !=null and sessionId      !=''"> , SESSION_ID      = #{sessionId}      </if>
+			<if test="profileName    !=null and profileName    !=''"> , PROFILE_NAME    = #{profileName}    </if>
+		WHERE USER_ID = #{userId}
+	</update>
+
+	<!-- DELETE SEED_PEOPLE_HDR -->
+	<delete id="deleteUser" parameterType="String">
+		DELETE FROM SEED_PEOPLE_HDR WHERE USER_ID = #{userId}
+	</delete>
+
+</mapper>

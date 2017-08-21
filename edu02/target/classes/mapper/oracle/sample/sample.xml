@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sample">
+
+	<resultMap type="SampleVO" id="sampleList">
+		<result property="userId"         column="USER_ID"         />
+		<result property="userName"       column="USER_NAME"       />
+		<result property="userPhone"      column="USER_PHONE"      />
+		<result property="userEmail"      column="USER_EMAIL"      />
+		<result property="corpCode"       column="CORP_CODE"       />
+		<result property="userLevel"      column="USER_LEVEL"      />
+		<result property="userDepartment" column="USER_DEPARTMENT" />
+		<result property="corpName"       column="CORP_NAME"       />
+		<result property="corpLevel"      column="CORP_LEVEL"      />
+		<result property="profileName"    column="PROFILE_NAME"    />
+		<result property="departmentName" column="DEPARTMENT_NAME" />
+		<result property="userRankname"   column="USER_RANKNAME"   />
+	</resultMap>
+
+	<select id="selectSampleList" parameterType="SampleVO" resultMap="sampleList">
+        <![CDATA[
+				SELECT a.USER_ID
+					, a.USER_NAME
+					, a.USER_PHONE
+					, a.USER_EMAIL
+					, a.CORP_CODE
+					, a.USER_LEVEL
+					, a.USER_DEPARTMENT
+					, b.CORP_NAME
+					, b.CORP_LEVEL
+					, a.PROFILE_NAME
+					, dn.CODE_NAME as DEPARTMENT_NAME
+					, ur.CODE_NAME as USER_RANKNAME
+				FROM SEED_PEOPLE_HDR a 
+				INNER JOIN SEED_VENDOR_HDR b 
+					ON  a.CORP_CODE = b.CORP_CODE
+				LEFT JOIN SEED_COM_CD dn
+					ON dn.CODE = a.USER_DEPARTMENT
+					AND dn.CODE_GBN = 'DEPARTMENT'
+				LEFT JOIN SEED_COM_CD ur
+					ON ur.CODE = a.USER_RANKCODE
+					AND ur.CODE_GBN = 'USERRANK'
+					AND a.USER_LEVEL <> '0'
+        ]]>
+        <where>
+			<if test="userId         !=null and userId         !=''"> AND a.USER_ID         = #{userId}         </if>
+			<if test="userName       !=null and userName       !=''"> AND a.USER_NAME       like '%${userName}%'       </if>
+			<if test="userPhone      !=null and userPhone      !=''"> AND a.USER_PHONE      like '%${userPhone}%'      </if>
+			<if test="userEmail      !=null and userEmail      !=''"> AND a.USER_EMAIL      like '%${userEmail}%'      </if>
+			<if test="corpCode       !=null and corpCode       !=''"> AND a.CORP_CODE       = #{corpCode}       </if>
+			<if test="userLevel      !=null and userLevel      !=''"> AND a.USER_LEVEL      = #{userLevel}      </if>
+			<if test="userDepartment !=null and userDepartment !=''"> AND a.USER_DEPARTMENT like '%${userDepartment}%' </if>
+			<if test="corpName       !=null and corpName       !=''"> AND b.CORP_NAME       like '%${corpName}%'       </if>
+			<if test="corpLevel      !=null and corpLevel      !=''"> AND b.CORP_LEVEL      = #{corpLevel}      </if>
+			<if test="profileName    !=null and profileName    !=''"> AND a.PROFILE_NAME    like '%${profileName}%'    </if>
+			<if test="departmentName !=null and departmentName !=''"> AND DEPARTMENT_NAME   like '%${departmentName}%' </if>
+			<if test="userRankname   !=null and userRankname   !=''"> AND USER_RANKNAME     like '%${userRankname}%'   </if>
+        </where>
+					ORDER BY USER_NAME
+<!-- 
+and USER_ID = #{userId}
+and user_pw = #{userPw}
+AND a.user_level != '0'
+ -->
+    </select>
+
+</mapper>

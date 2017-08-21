@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="console-3rdparty" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="3rdparty [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="console-query" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="query: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="console-queryResult" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="queryResult: %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="edu.seedit" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console"/>
+	</logger>
+
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+		<appender-ref ref="console-3rdparty"/>
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+		<appender-ref ref="console-3rdparty"/>
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+		<appender-ref ref="console-3rdparty"/>
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+		<appender-ref ref="console-3rdparty"/>
+	</logger>
+
+	<!-- Query Loggers -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="console-query"/>
+	</logger>
+
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="console-queryResult"/>
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<!-- <priority value="warn" /> -->
+		<priority value="off"/>
+		<appender-ref ref="console" />
+	</root>
+
+</log4j:configuration>
